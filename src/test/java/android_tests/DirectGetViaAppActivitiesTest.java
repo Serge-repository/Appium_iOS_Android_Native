@@ -1,16 +1,14 @@
-package appium_tests;
+package android_tests;
 
-import GeneralSetup.AppActivities;
 import GeneralSetup.TestBasisMobile;
 import io.appium.java_client.android.nativekey.AndroidKey;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class DirectGetViaAppActivitiesTest extends TestBasisMobile {
-    @BeforeMethod
-    public void beforeMethod(){
-        setAppActivity(AppActivities.TEXT_FIELDS_VIEW);
-    }
+//    @BeforeMethod
+//    public void beforeMethod(){
+//        setAppActivity(AppActivities.TEXT_FIELDS_VIEW);
+//    }
 
     @Test
     public void textInput(){
