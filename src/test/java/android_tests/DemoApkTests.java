@@ -1,15 +1,13 @@
-package appium_tests;
+package android_tests;
 
-import GeneralSetup.AppActivities;
 import GeneralSetup.TestBasisMobile;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class DemoApkTests extends TestBasisMobile {
-    @BeforeMethod(alwaysRun = true)
-    public void beforeMethod(){
-        setAppActivity(AppActivities.HOME_VIEW);
-    }
+//    @BeforeMethod(alwaysRun = true)
+//    public void beforeMethod(){
+//        setAppActivity(AppActivities.HOME_VIEW);
+//    }
 
     @Test
     public void firstTest(){

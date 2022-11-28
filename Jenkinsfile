@@ -12,10 +12,10 @@ pipeline {
                             src/test/resources/testngParallel.xml (requires changes in TestBasis).
                             Leave this field empty if you want to run single test class.
                             ''')
-        string(name: 'TEST_CLASS', defaultValue: 'appium_tests.DemoApkTests',
+        string(name: 'TEST_CLASS', defaultValue: 'android_tests.DemoApkTests',
             description: '''Select test class to execute. Examples:
-                            appium_tests.DirectGetViaAppActivitiesTest,
-                            appium_tests.ViewsTest.
+                            android_tests.DirectGetViaAppActivitiesTest,
+                            android_tests.ViewsTest.
                             Leave this field empty if you want to run xml suite.
                             ''')
         string(name: 'forks', defaultValue: '1', description: 'Number of parallel threads')

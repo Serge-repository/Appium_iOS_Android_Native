@@ -2,10 +2,11 @@
 
 <suite name="MobileSuite" verbose="1">
     <test name="Regression">
+        <parameter name="device" value="iPhone_13_local" />
         <classes>
-            <class name="appium_tests.DemoApkTests"/>
-            <class name="appium_tests.DirectGetViaAppActivitiesTest"/>
-            <class name="appium_tests.ViewsTest"/>
+            <class name="android_tests.DemoApkTests"/>
+            <class name="android_tests.DirectGetViaAppActivitiesTest"/>
+            <class name="android_tests.ViewsTest"/>
         </classes>
     </test>
 </suite>

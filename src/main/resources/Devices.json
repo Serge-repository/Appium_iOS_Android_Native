@@ -1,0 +1,10 @@
+{
+  "iPhone_13_local": {
+    "deviceName": "iPhone 13 Pro Max",
+    "udid": "DF3EBAD2-4ABC-406D-B468-6D13436DB53E",
+    "platformName": "iOS",
+    "automationName": "XCUITest",
+    "appName": "UIKitCatalog-iphonesimulator.app",
+    "wdaBundleId": "com.example.apple-samplecode.UICatalog"
+  }
+}
