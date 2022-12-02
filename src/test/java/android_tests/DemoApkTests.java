@@ -1,13 +1,17 @@
 package android_tests;
 
+import GeneralSetup.AppActivities;
 import GeneralSetup.TestBasisMobile;
+import io.appium.java_client.android.Activity;
+import io.appium.java_client.android.AndroidDriver;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class DemoApkTests extends TestBasisMobile {
-//    @BeforeMethod(alwaysRun = true)
-//    public void beforeMethod(){
-//        setAppActivity(AppActivities.HOME_VIEW);
-//    }
+    @BeforeMethod(alwaysRun = true)
+    public void beforeMethod(){
+        ((AndroidDriver<?>) appiumDriver).startActivity(new Activity(appPackage, AppActivities.HOME_VIEW.getActivityPath()));
+    }
 
     @Test
     public void firstTest(){

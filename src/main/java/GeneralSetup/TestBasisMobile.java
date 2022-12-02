@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -13,6 +14,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import views.HomeView;
 import views.TextFieldsView;
 import views.ViewsView;
@@ -38,11 +40,13 @@ public class TestBasisMobile {
     public TextFieldsView textFieldsView;
 
     public static String appPath;
+    public static String appPackage = "io.appium.android.apis";
+
+    private final String platformSelector = System.getProperty("platform", "iOS_emulator");
 
     ///////////// uncomment for local single device run //////////////////////
     @BeforeClass(alwaysRun = true)
     public void beforeClass() throws IOException {
-        deviceName = System.getProperty("device", "iPhone_13_local");
 
         ///////////// uncomment for parallel device run via xml suite //////////////////////
 //    @Parameters({"device"})
@@ -51,25 +55,42 @@ public class TestBasisMobile {
 //    deviceName = System.getProperty("device", device);
 
         initDeviceMaps();
-        deviceSettings = deviceMaps.get(deviceName);
+        switch (platformSelector) {
+            case "Android_emulator":
+                deviceName = System.getProperty("device", "android_Pixel4_local");
 
-        service = AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
-                .usingDriverExecutable(new File("/usr/local/bin/node"))
-                .withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
-                .usingPort(4723)
-                .withArgument(GeneralServerFlag.SESSION_OVERRIDE));
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceSettings.get("deviceName"));
-        capabilities.setCapability(MobileCapabilityType.UDID, deviceSettings.get("udid"));
-        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 1000);
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, deviceSettings.get("platformName"));
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, deviceSettings.get("automationName"));
-        // (не обязательно) для того чтобы УСТАНОВИТЬ ПРИЛОЖЕНИЕ (каждый раз при запуске кода) как на андроид так и на айос
+                service = AppiumDriverLocalService.buildDefaultService();
+                setCapabilities();
+                // (не обязательно) для того чтобы УСТАНОВИТЬ ПРИЛОЖЕНИЕ (каждый раз при запуске кода)
+                appPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main"
+                        + File.separator + "resources" + File.separator + deviceSettings.get("appName");
+                capabilities.setCapability(MobileCapabilityType.APP, appPath);
+                // для автоматического запуска эмулятора
+                capabilities.setCapability("avd", deviceSettings.get("avdName"));
+                capabilities.setCapability("avdLaunchTimeout", 180000);  //3 minutes
+                // сколько сохранять активность сессии в дебаге
+                capabilities.setCapability("newCommandTimeout", 300);  //5 minutes
+                capabilities.setCapability("appPackage", deviceSettings.get("appPackage"));
+                // для разблокировки экрана
+                capabilities.setCapability("unlockType", "pin");
+                capabilities.setCapability("unlockKey", "0000");
+                break;
+            case "iOS_emulator" :
+                deviceName = System.getProperty("device", "iPhone_13_local");
+                service = AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
+                        .usingDriverExecutable(new File("/usr/local/bin/node"))
+                        .withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
+                        .usingPort(4724)
+                        .withArgument(GeneralServerFlag.SESSION_OVERRIDE));
+                setCapabilities();
+          // (не обязательно) для того чтобы УСТАНОВИТЬ ПРИЛОЖЕНИЕ (каждый раз при запуске кода)
 //        appPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main"
 //                + File.separator + "resources" + File.separator + deviceSettings.get("appName");
 //        capabilities.setCapability(MobileCapabilityType.APP, appPath);
-        capabilities.setCapability("simulatorStartupTimeout", 180000);  //3 minutes
-        capabilities.setCapability("bundleId", deviceSettings.get("wdaBundleId"));
-
+                capabilities.setCapability("simulatorStartupTimeout", 180000);  //3 minutes
+                capabilities.setCapability("bundleId", deviceSettings.get("wdaBundleId"));
+                break;
+        }
         serverAddress = new URL("http://127.0.0.1:4723/wd/hub");
         service.start();
         initializeDriver();
@@ -81,21 +102,23 @@ public class TestBasisMobile {
         service.stop();
     }
 
-    private void initializeClasses() {
+    private void initializeAndroidClasses() {
         homeView = new HomeView(appiumDriver, wait);
         viewsView = new ViewsView(appiumDriver, wait);
         textFieldsView = new TextFieldsView(appiumDriver, wait);
     }
 
-//    protected void setAppActivity(AppActivities appActivity) {
-//        capabilities.setCapability("appActivity", appActivity.getActivityPath());
-//        initializeDriver();
-//    }
-
     private void initializeDriver() {
-        appiumDriver = new IOSDriver<>(serverAddress, capabilities);
+        switch (platformSelector) {
+            case "Android_emulator":
+                appiumDriver = new AndroidDriver<>(serverAddress, capabilities);
+                initializeAndroidClasses();
+                break;
+            case "iOS_emulator":
+                appiumDriver = new IOSDriver<>(serverAddress, capabilities);
+                break;
+        }
         wait = new WebDriverWait(appiumDriver, 10);
-//        initializeClasses();
     }
 
     private void initDeviceMaps() throws IOException {
@@ -106,5 +129,14 @@ public class TestBasisMobile {
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
         deviceMaps = new ObjectMapper().enable(JsonParser.Feature.ALLOW_COMMENTS).readValue(reader, HashMap.class);
         stream.close();
+    }
+
+    private void setCapabilities() {
+        deviceSettings = deviceMaps.get(deviceName);
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceSettings.get("deviceName"));
+        capabilities.setCapability(MobileCapabilityType.UDID, deviceSettings.get("udid"));
+        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 1000);
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, deviceSettings.get("platformName"));
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, deviceSettings.get("automationName"));
     }
 }

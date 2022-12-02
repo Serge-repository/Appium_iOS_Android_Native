@@ -1,12 +1,16 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="MobileSuite" verbose="1">
-    <test name="Regression">
-        <parameter name="device" value="iPhone_13_local" />
+    <test name="iOS_test">
+        <parameter name="device" value="android_Pixel4_local" />
         <classes>
             <class name="android_tests.DemoApkTests"/>
-            <class name="android_tests.DirectGetViaAppActivitiesTest"/>
-            <class name="android_tests.ViewsTest"/>
+        </classes>
+    </test>
+    <test name="android_test">
+        <parameter name="device" value="iPhone_13_local" />
+        <classes>
+            <class name="ios_tests.DemoAppTests"/>
         </classes>
     </test>
 </suite>

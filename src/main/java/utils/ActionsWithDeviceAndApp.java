@@ -11,19 +11,19 @@ import static GeneralSetup.TestBasisMobile.appiumDriver;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class ActionsWithDeviceAndApp {
-//    public void terminateApp(Duration duration){
-//        appiumDriver.terminateApp(TestBasisMobile.appPackage, new AndroidTerminateApplicationOptions()
-//                .withTimeout(Duration.ofMillis(duration.toMillis()))); // time to wait until app terminated
-//    }
+    public void terminateApp(Duration duration){
+        appiumDriver.terminateApp(TestBasisMobile.appPackage, new AndroidTerminateApplicationOptions()
+                .withTimeout(Duration.ofMillis(duration.toMillis()))); // time to wait until app terminated
+    }
 
     public void installApp(){
         appiumDriver.installApp(TestBasisMobile.appPath, new AndroidInstallApplicationOptions()
                 .withReplaceEnabled()); // allows to update apps with new versions
     }
 
-//    public void checkIfAppInstalled() {
-//        assertTrue(appiumDriver.isAppInstalled(TestBasisMobile.appPackage));
-//    }
+    public void checkIfAppInstalled() {
+        assertTrue(appiumDriver.isAppInstalled(TestBasisMobile.appPackage));
+    }
 
     public void runAppInBackground() {
         appiumDriver.runAppInBackground(Duration.ofMillis(4000));
