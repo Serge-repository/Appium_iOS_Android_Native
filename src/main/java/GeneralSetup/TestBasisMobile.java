@@ -42,7 +42,7 @@ public class TestBasisMobile {
     public static String appPath;
     public static String appPackage = "io.appium.android.apis";
 
-    private final String platformSelector = System.getProperty("platform", "iOS_emulator");
+    private final String platformSelector = System.getProperty("platform", "Android_emulator");
 
     ///////////// uncomment for local single device run //////////////////////
     @BeforeClass(alwaysRun = true)
@@ -61,10 +61,11 @@ public class TestBasisMobile {
 
                 service = AppiumDriverLocalService.buildDefaultService();
                 setCapabilities();
-                // (не обязательно) для того чтобы УСТАНОВИТЬ ПРИЛОЖЕНИЕ (каждый раз при запуске кода)
                 appPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main"
                         + File.separator + "resources" + File.separator + deviceSettings.get("appName");
                 capabilities.setCapability(MobileCapabilityType.APP, appPath);
+                capabilities.setCapability("noReset","true");
+                capabilities.setCapability("fullReset","false");
                 // для автоматического запуска эмулятора
                 capabilities.setCapability("avd", deviceSettings.get("avdName"));
                 capabilities.setCapability("avdLaunchTimeout", 180000);  //3 minutes
