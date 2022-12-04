@@ -1,4 +1,4 @@
-package views;
+package views.android;
 
 import GeneralSetup.DataManagement;
 import io.appium.java_client.AppiumDriver;

@@ -7,7 +7,7 @@ public class DemoAppTests extends TestBasisMobile {
 
     @Test
     public void firstTest() {
-        appiumDriver.findElementByAccessibilityId("Activity Indicators").click();
+        homeViewIos.differentSelectorsStrategies();
     }
 
 }

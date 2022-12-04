@@ -11,7 +11,7 @@ import java.time.Duration;
 import static GeneralSetup.TestBasisMobile.appiumDriver;
 
 public class TouchActionClass {
-    public final TouchAction touchAction = new TouchAction(appiumDriver);
+    public final TouchAction<?> touchAction = new TouchAction<>(appiumDriver);
 
     public void tap(MobileElement element) {
         touchAction.tap(ElementOption.element(element)).perform();
@@ -38,16 +38,16 @@ public class TouchActionClass {
     }
 
     public void scrollAction(int fromX, int fromY, int toX, int toY){
-        (new TouchAction(appiumDriver))
-                .press(new PointOption().withCoordinates(fromX, fromY))
+        (new TouchAction<>(appiumDriver))
+                .press(new PointOption<>().withCoordinates(fromX, fromY))
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000))) //на сколько быстрым будет свайп
-                .moveTo(new PointOption().withCoordinates(toX, toY))
+                .moveTo(new PointOption<>().withCoordinates(toX, toY))
                 .release()
                 .perform();
     }
 
     public void scrollActionUsingElements(MobileElement elementFrom, MobileElement elementTo){
-        (new TouchAction(appiumDriver))
+        (new TouchAction<>(appiumDriver))
                 .press(ElementOption.element(elementFrom))
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000))) //на сколько быстрым будет свайп
                 .moveTo(ElementOption.element(elementTo))

@@ -29,6 +29,10 @@ public class MyElement {
         }
     }
 
+    public String getText() {
+            return appiumDriver.findElement(locator).getText();
+    }
+
     public void click(){
         log.debug("Going to click " + name + " element");
         try {

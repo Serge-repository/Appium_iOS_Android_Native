@@ -14,10 +14,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import views.HomeView;
-import views.TextFieldsView;
-import views.ViewsView;
+import views.android.TextFieldsView;
+import views.android.ViewsView;
+import views.android.HomeView;
+import views.ios.HomeViewIOS;
 
 import java.io.*;
 import java.net.URL;
@@ -39,10 +39,12 @@ public class TestBasisMobile {
     public ViewsView viewsView;
     public TextFieldsView textFieldsView;
 
+    public HomeViewIOS homeViewIos;
+
     public static String appPath;
     public static String appPackage = "io.appium.android.apis";
 
-    private final String platformSelector = System.getProperty("platform", "Android_emulator");
+    private final String platformSelector = System.getProperty("platform", "iOS_emulator");
 
     ///////////// uncomment for local single device run //////////////////////
     @BeforeClass(alwaysRun = true)
@@ -58,17 +60,16 @@ public class TestBasisMobile {
         switch (platformSelector) {
             case "Android_emulator":
                 deviceName = System.getProperty("device", "android_Pixel4_local");
-
                 service = AppiumDriverLocalService.buildDefaultService();
                 setCapabilities();
                 appPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main"
                         + File.separator + "resources" + File.separator + deviceSettings.get("appName");
                 capabilities.setCapability(MobileCapabilityType.APP, appPath);
-                capabilities.setCapability("noReset","true");
-                capabilities.setCapability("fullReset","false");
+                capabilities.setCapability("noReset", "true");
+                capabilities.setCapability("fullReset", "false");
                 // для автоматического запуска эмулятора
                 capabilities.setCapability("avd", deviceSettings.get("avdName"));
-                capabilities.setCapability("avdLaunchTimeout", 180000);  //3 minutes
+                capabilities.setCapability("avdLaunchTimeout", 200000);
                 // сколько сохранять активность сессии в дебаге
                 capabilities.setCapability("newCommandTimeout", 300);  //5 minutes
                 capabilities.setCapability("appPackage", deviceSettings.get("appPackage"));
@@ -76,7 +77,7 @@ public class TestBasisMobile {
                 capabilities.setCapability("unlockType", "pin");
                 capabilities.setCapability("unlockKey", "0000");
                 break;
-            case "iOS_emulator" :
+            case "iOS_emulator":
                 deviceName = System.getProperty("device", "iPhone_13_local");
                 service = AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
                         .usingDriverExecutable(new File("/usr/local/bin/node"))
@@ -84,7 +85,7 @@ public class TestBasisMobile {
                         .usingPort(4724)
                         .withArgument(GeneralServerFlag.SESSION_OVERRIDE));
                 setCapabilities();
-          // (не обязательно) для того чтобы УСТАНОВИТЬ ПРИЛОЖЕНИЕ (каждый раз при запуске кода)
+                // (не обязательно) для того чтобы УСТАНОВИТЬ ПРИЛОЖЕНИЕ (каждый раз при запуске кода)
 //        appPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main"
 //                + File.separator + "resources" + File.separator + deviceSettings.get("appName");
 //        capabilities.setCapability(MobileCapabilityType.APP, appPath);
@@ -109,6 +110,10 @@ public class TestBasisMobile {
         textFieldsView = new TextFieldsView(appiumDriver, wait);
     }
 
+    private void initializeIOSClasses() {
+        homeViewIos = new HomeViewIOS(appiumDriver, wait);
+    }
+
     private void initializeDriver() {
         switch (platformSelector) {
             case "Android_emulator":
@@ -117,6 +122,7 @@ public class TestBasisMobile {
                 break;
             case "iOS_emulator":
                 appiumDriver = new IOSDriver<>(serverAddress, capabilities);
+                initializeIOSClasses();
                 break;
         }
         wait = new WebDriverWait(appiumDriver, 10);
