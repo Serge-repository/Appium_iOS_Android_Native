@@ -28,6 +28,10 @@ public class HomeViewIOS extends DataManagement {
     private final MyElement slidersNameElement = new MyElement("Sliders tab", MobileBy.name("Sliders"));
     // "id" field must be same as for "name" in appium inspector
     private final MyElement slidersIdElement = new MyElement("Sliders tab by id", MobileBy.id("Sliders"));
+    // by ios ns predicate ("ios predicate string" in appium inspector
+    private final MyElement predicate = new MyElement("Predicate", MobileBy.iOSNsPredicateString("label == \"Text View\""));
+    // you can use OR here as well
+    private final MyElement anotherPredicate = new MyElement("Another Predicate", MobileBy.iOSNsPredicateString("type == \"XCUIElementTypeStaticText\" AND label == \"Text View\""));
 
     public HomeViewIOS(AppiumDriver<MobileElement> appiumDriver, WebDriverWait wait) {
         super(appiumDriver, wait);
@@ -42,23 +46,10 @@ public class HomeViewIOS extends DataManagement {
         System.out.println(classNameElement.get(1).getText());
         System.out.println(slidersIdElement.getText());
         System.out.println(appiumDriver.findElementByXPath("//XCUIElementTypeStaticText[@name=\"Text View\"]").getText());
-
+        System.out.println(predicate.getText());
+        System.out.println(anotherPredicate.getText());
     }
 
-//    public void selectorsUsingUiAutomator2() {
-//        System.out.println(elementByUiAutomator.getText());
-//
-//        // see selector methods for UI automator 2 here
-//        // https://developer.android.com/reference/androidx/test/uiautomator/UiSelector
-//        MobileElement oneUiAutomatorElement = (MobileElement) ((FindsByAndroidUIAutomator) appiumDriver).findElementByAndroidUIAutomator("new UiSelector().description(\"Accessibility\")");
-//        System.out.println(oneUiAutomatorElement); // content-desc in Appium Inspector
-//
-//        List<MobileElement> elementsByUiAutomator = (List<MobileElement>) ((FindsByAndroidUIAutomator) appiumDriver).findElementsByAndroidUIAutomator("new UiSelector().className(\"android.widget.TextView\")");
-//        System.out.println(elementsByUiAutomator.get(3).getText());
-//
-//        MobileElement elementsByUiAutomator2 = (MobileElement) ((FindsByAndroidUIAutomator) appiumDriver).findElementsByAndroidUIAutomator("new UiSelector().className(\"android.widget.TextView\")").get(3);
-//        System.out.println(elementsByUiAutomator2.getText());
-//    }
 //
 //    public void byExampleForHybridApp() {
 //        By hybridAppBy = MobileBy.AccessibilityId("Accessibility");

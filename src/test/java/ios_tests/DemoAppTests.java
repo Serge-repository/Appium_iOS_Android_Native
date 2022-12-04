@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class DemoAppTests extends TestBasisMobile {
 
     @Test
-    public void firstTest() {
+    public void selectorsStrategiesTest() {
         homeViewIos.differentSelectorsStrategies();
     }
 
