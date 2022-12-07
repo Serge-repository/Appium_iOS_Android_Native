@@ -10,4 +10,34 @@ public class DemoAppTests extends TestBasisMobile {
         homeViewIos.differentSelectorsStrategies();
     }
 
+    @Test
+    public void verifyingElementAttributes() {
+        homeViewIos.verifyElementAttributes();
+    }
+
+    @Test
+    public void tapOnElement(){
+        homeViewIos.tapOnElement();
+    }
+
+    @Test
+    public void tapOnElementByCoordinates(){
+        homeViewIos.tapOnElementByCoordinates();
+    }
+
+    @Test
+    public void tapOnElementByExactCoordinates(){
+        homeViewIos.tapOnElementByExactCoordinates(20, 272);
+    }
+
+    @Test
+    public void scrollsTestUsingElements(){
+        homeViewIos.scrollFromSlidersToActivityIndicators();
+    }
+
+    @Test
+    public void scrollUsingCoordinates(){
+        homeViewIos.getTouchAction().scrollAction(0, 91, 0, 839);
+    }
+
 }

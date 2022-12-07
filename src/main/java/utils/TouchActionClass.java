@@ -25,7 +25,7 @@ public class TouchActionClass {
         touchAction.tap(PointOption.point(x, y)).perform();
     }
 
-    //потом обязательно нужно отпустить - release
+    // потом обязательно нужно отпустить - release
     // waitAction - определяем время сколько нажать и удерживать элемент
     public void pressAction(MobileElement element) {
         touchAction.press(ElementOption.element(element))

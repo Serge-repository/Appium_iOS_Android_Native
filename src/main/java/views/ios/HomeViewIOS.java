@@ -6,9 +6,13 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
 import utils.MyElement;
 
 import java.util.List;
+
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class HomeViewIOS extends DataManagement {
 
@@ -50,36 +54,34 @@ public class HomeViewIOS extends DataManagement {
         System.out.println(anotherPredicate.getText());
     }
 
-//
-//    public void byExampleForHybridApp() {
-//        By hybridAppBy = MobileBy.AccessibilityId("Accessibility");
-//        System.out.println(appiumDriver.findElement(hybridAppBy).getText());
-//    }
-//
-//    public void selectViewsOption() {
-//        views.click();
-//    }
-//
-//    public void validateAccessibilityElementByAttribute() {
-//        System.out.println(getElementAttribute(accessibilityButton, "text"));
-//        assertEquals(getElementAttribute(accessibilityButton, "text"), "Accessibility", "Element text is not correct");
-//        assertFalse(accessibilityButton.isSelected(), "Button is selected already");
-//    }
-//
-//    public void clickOnMyElement() {
-//        getWaitUtils().myElementExplicitWait(views);
-//        views.click();
-//    }
-//
-//    public void tapOnElement() {
-//        touchAction.tap(accessibilityButton);
-//    }
-//
-//    public void tapOnElementByCoordinates() {
-//        touchAction.tapOnElementByCoordinates(accessibilityButton);
-//    }
-//
-//    public void tapOnElementByExactCoordinates(int x, int y) {
-//        touchAction.tapOnElementByExactCoordinates(x, y);
-//    }
+    public void verifyElementAttributes() {
+        assertTrue(appiumDriver.findElementByAccessibilityId("Activity Indicators").isDisplayed());
+        System.out.println(appiumDriver.findElementByAccessibilityId("Activity Indicators").isDisplayed());
+
+        assertTrue(activityIndicatorsButton.isEnabled());
+        System.out.println(activityIndicatorsButton.isEnabled());
+
+        assertFalse(classNameElement.get(1).isSelected());
+        System.out.println(classNameElement.get(1).isSelected());
+
+        // you can test/get any attribute by its name
+        System.out.println(activityIndicatorsButton.getAttribute("type"));
+    }
+
+
+    public void tapOnElement() {
+        touchAction.tap(activityIndicatorsButton);
+    }
+
+    public void tapOnElementByCoordinates() {
+        touchAction.tapOnElementByCoordinates(slidersNameElement.getMobileElement());
+    }
+
+    public void tapOnElementByExactCoordinates(int x, int y) {
+        touchAction.tapOnElementByExactCoordinates(x, y);
+    }
+
+    public void scrollFromSlidersToActivityIndicators() {
+        touchAction.scrollActionUsingElements(slidersNameElement.getMobileElement(), activityIndicatorsButton);
+    }
 }
