@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.ActionsWithDeviceAndApp;
 import utils.TouchActionClass;
 import utils.WaitUtils;
+import utils.ios.ActionsWithDeviceAndAppIOS;
 
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -21,6 +22,7 @@ public abstract class GeneralView {
     public final WaitUtils waitUtils = new WaitUtils();
     public final TouchActionClass touchAction = new TouchActionClass();
     public final ActionsWithDeviceAndApp actionsWithDeviceAndApp = new ActionsWithDeviceAndApp();
+    public final ActionsWithDeviceAndAppIOS actionsWithDeviceAndAppIos = new ActionsWithDeviceAndAppIOS();
 
     public GeneralView(AppiumDriver<MobileElement> appiumDriver, WebDriverWait wait) {
         this.appiumDriver = appiumDriver;
@@ -38,6 +40,10 @@ public abstract class GeneralView {
 
     public ActionsWithDeviceAndApp getActionsWithDeviceAndApp() {
         return actionsWithDeviceAndApp;
+    }
+
+    public ActionsWithDeviceAndAppIOS getActionsWithDeviceAndAppIos() {
+        return actionsWithDeviceAndAppIos;
     }
 
     public void hideKeyboard(){

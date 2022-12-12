@@ -31,7 +31,7 @@ public class TestBasisMobile {
     private DesiredCapabilities capabilities = new DesiredCapabilities();
     private URL serverAddress;
     private AppiumDriverLocalService service;
-    private Map<String, String> deviceSettings;
+    private static Map<String, String> deviceSettings;
     private String deviceName;
     private Map<String, Map<String, String>> deviceMaps;
 
@@ -102,6 +102,10 @@ public class TestBasisMobile {
     public void afterClass() {
         appiumDriver.quit();
         service.stop();
+    }
+
+    public static Map<String, String> getDeviceSettings() {
+        return deviceSettings;
     }
 
     private void initializeAndroidClasses() {
