@@ -18,6 +18,7 @@ import views.android.TextFieldsView;
 import views.android.ViewsView;
 import views.android.HomeView;
 import views.ios.HomeViewIOS;
+import views.ios.TextFieldsViewIOS;
 
 import java.io.*;
 import java.net.URL;
@@ -40,11 +41,12 @@ public class TestBasisMobile {
     public TextFieldsView textFieldsView;
 
     public HomeViewIOS homeViewIos;
+    public TextFieldsViewIOS textFieldsViewIOS;
 
     public static String appPath;
     public static String appPackage = "io.appium.android.apis";
 
-    private final String platformSelector = System.getProperty("platform", "iOS_emulator");
+    public static String platformSelector = System.getProperty("platform", "iOS_emulator");
 
     ///////////// uncomment for local single device run //////////////////////
     @BeforeClass(alwaysRun = true)
@@ -116,6 +118,7 @@ public class TestBasisMobile {
 
     private void initializeIOSClasses() {
         homeViewIos = new HomeViewIOS(appiumDriver, wait);
+        textFieldsViewIOS = new TextFieldsViewIOS(appiumDriver, wait);
     }
 
     private void initializeDriver() {
