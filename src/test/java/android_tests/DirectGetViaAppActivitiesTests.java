@@ -8,7 +8,7 @@ import io.appium.java_client.android.nativekey.AndroidKey;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class DirectGetViaAppActivitiesTest extends TestBasisMobile {
+public class DirectGetViaAppActivitiesTests extends TestBasisMobile {
     @BeforeMethod
     public void beforeMethod(){
         ((AndroidDriver) appiumDriver).startActivity(new Activity(appPackage, AppActivities.TEXT_FIELDS_VIEW.getActivityPath()));

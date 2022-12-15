@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 
-public class ActionsIos extends TestBasisMobile {
+public class ActionsIosTests extends TestBasisMobile {
 
     @Test
     public void iosTerminateApp() {
@@ -20,6 +20,7 @@ public class ActionsIos extends TestBasisMobile {
 
     @Test
     public void iosRunAppInBackground() {
+        homeViewIos.getActionsWithDeviceAndAppIos().activateIosApp(TestBasisMobile.getDeviceSettings().get("wdaBundleId"));
         homeViewIos.getActionsWithDeviceAndAppIos().runIosAppInBackground();
         System.out.println(homeViewIos.getActionsWithDeviceAndAppIos().queryIosAppState(TestBasisMobile.getDeviceSettings().get("wdaBundleId")));
     }

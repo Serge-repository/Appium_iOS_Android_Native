@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class ViewsTest extends TestBasisMobile {
+public class ViewsTests extends TestBasisMobile {
     @BeforeMethod
     public void beforeMethod(){
         ((AndroidDriver) appiumDriver).startActivity(new Activity(appPackage, AppActivities.GALLERY_ONE_VIEW.getActivityPath()));
