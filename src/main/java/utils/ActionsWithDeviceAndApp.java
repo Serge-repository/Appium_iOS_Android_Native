@@ -13,7 +13,7 @@ import static org.testng.AssertJUnit.assertTrue;
 public class ActionsWithDeviceAndApp {
     public void terminateApp(Duration duration){
         appiumDriver.terminateApp(TestBasisMobile.appPackage, new AndroidTerminateApplicationOptions().withTimeout(Duration.ofMillis(duration.toMillis())));
-        // time to wait until app terminated
+        // closes the app
     }
 
     public void installApp(){
