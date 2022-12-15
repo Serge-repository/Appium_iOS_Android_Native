@@ -13,12 +13,12 @@ import static GeneralSetup.TestBasisMobile.platformSelector;
 public class DeepLink {
     // This is deep links class which allows to start application from the required screen. Mainly is actual for iOS.
     // NOTE! We must ask developers if they have such deep links implemented inside Android/iOS app AND provide us the deep links structure
-    public static void OpenAppOnView(String url) {
+    public static void OpenAppOnView(String deepLinkUrl) {
 
         switch (platformSelector) {
             case "Android_emulator":
                 HashMap<String, String> deepUrl = new HashMap<>();
-                deepUrl.put("url", url);
+                deepUrl.put("url", deepLinkUrl);
                 deepUrl.put("package", "com.swaglabsmobileapp");
                 appiumDriver.executeScript("mobile: deepLink", deepUrl);
                 break;
@@ -35,7 +35,7 @@ public class DeepLink {
                 WebDriverWait wait = new WebDriverWait(appiumDriver, 10);
                 wait.until(ExpectedConditions.visibilityOfElementLocated(urlBtn)).click();
                 // uE007 means pressing Enter button in another interpretation
-                wait.until(ExpectedConditions.visibilityOfElementLocated(urlFld)).sendKeys("" + url + "\uE007");
+                wait.until(ExpectedConditions.visibilityOfElementLocated(urlFld)).sendKeys("" + deepLinkUrl + "\uE007");
                 wait.until(ExpectedConditions.visibilityOfElementLocated(openBtn)).click();
                 break;
         }
