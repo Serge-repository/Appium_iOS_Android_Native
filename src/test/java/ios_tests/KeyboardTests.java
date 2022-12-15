@@ -8,6 +8,13 @@ public class KeyboardTests extends TestBasisMobile {
     @Test
     public void selectorsStrategiesTest() {
         textFieldsViewIOS.openTextFieldsViewIos();
+        textFieldsViewIOS.enterTextIntoDefaultTextBox();
+    }
+
+    @Test
+    public void useSeleniumKeyboardMethod() {
+        textFieldsViewIOS.openTextFieldsViewIos();
+        textFieldsViewIOS.enterTextUsingSendKeys();
     }
 
 }
