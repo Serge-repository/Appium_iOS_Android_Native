@@ -1,4 +1,4 @@
-package utils.deep_links;
+package utils.ios;
 
 import io.appium.java_client.MobileBy;
 import org.openqa.selenium.By;
@@ -13,7 +13,7 @@ import static GeneralSetup.TestBasisMobile.platformSelector;
 public class DeepLink {
     // This is deep links class which allows to start application from the required screen. Mainly is actual for iOS.
     // NOTE! We must ask developers if they have such deep links implemented inside Android/iOS app AND provide us the deep links structure
-    public static void OpenAppOnView(String deepLinkUrl) {
+    public static void openAppOnView(String deepLinkUrl) {
 
         switch (platformSelector) {
             case "Android_emulator":

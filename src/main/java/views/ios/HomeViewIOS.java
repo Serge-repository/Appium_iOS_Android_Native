@@ -6,7 +6,6 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Test;
 import utils.MyElement;
 
 import java.util.List;

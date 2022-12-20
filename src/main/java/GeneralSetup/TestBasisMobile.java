@@ -19,6 +19,7 @@ import views.android.ViewsView;
 import views.android.HomeView;
 import views.ios.HomeViewIOS;
 import views.ios.TextFieldsViewIOS;
+import views.ios.WebViewIOS;
 
 import java.io.*;
 import java.net.URL;
@@ -42,6 +43,7 @@ public class TestBasisMobile {
 
     public HomeViewIOS homeViewIos;
     public TextFieldsViewIOS textFieldsViewIOS;
+    public WebViewIOS webViewIOS;
 
     public static String appPath;
     public static String appPackage = "io.appium.android.apis";
@@ -93,6 +95,8 @@ public class TestBasisMobile {
 //        capabilities.setCapability(MobileCapabilityType.APP, appPath);
                 capabilities.setCapability("simulatorStartupTimeout", 180000);  //3 minutes
                 capabilities.setCapability("bundleId", deviceSettings.get("wdaBundleId"));
+                // позволяет видеть все контексты в Сафари для гибридынх страниц
+                capabilities.setCapability("includeSafariInWebviews", true);
                 break;
         }
         serverAddress = new URL("http://127.0.0.1:4723/wd/hub");
@@ -119,6 +123,7 @@ public class TestBasisMobile {
     private void initializeIOSClasses() {
         homeViewIos = new HomeViewIOS(appiumDriver, wait);
         textFieldsViewIOS = new TextFieldsViewIOS(appiumDriver, wait);
+        webViewIOS = new WebViewIOS(appiumDriver, wait);
     }
 
     private void initializeDriver() {
@@ -152,5 +157,7 @@ public class TestBasisMobile {
         capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 1000);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, deviceSettings.get("platformName"));
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, deviceSettings.get("automationName"));
+        // not necessary (waits for webview to connect)
+        capabilities.setCapability("webviewConnectTimeout", 9000);
     }
 }
