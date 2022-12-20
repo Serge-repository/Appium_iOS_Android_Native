@@ -48,7 +48,7 @@ public class TestBasisMobile {
     public static String appPath;
     public static String appPackage = "io.appium.android.apis";
 
-    public static String platformSelector = System.getProperty("platform", "iOS_emulator");
+    public static String platformSelector = System.getProperty("platform", "Android_emulator");
 
     ///////////// uncomment for local single device run //////////////////////
     @BeforeClass(alwaysRun = true)
