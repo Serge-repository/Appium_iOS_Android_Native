@@ -6,13 +6,13 @@ import org.testng.annotations.Test;
 public class KeyboardTests extends TestBasisMobile {
 
     @Test
-    public void selectorsStrategiesTest() {
+    public void enterTextUsingKeyboardButtonsSelectorsTest() {
         textFieldsViewIOS.openTextFieldsViewIos();
         textFieldsViewIOS.enterTextIntoDefaultTextBox();
     }
 
     @Test
-    public void useSeleniumKeyboardMethod() {
+    public void enterTextMethod() {
         textFieldsViewIOS.openTextFieldsViewIos();
         textFieldsViewIOS.enterTextUsingSendKeys();
     }
