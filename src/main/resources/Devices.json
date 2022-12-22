@@ -8,12 +8,12 @@
     "wdaBundleId": "com.example.apple-samplecode.UICatalog"
   },
   "android_Pixel4_local": {
-    "deviceName": "Pixel 4",
+    "deviceName": "Pixel 4 API 30",
     "udid": "emulator-5554",
     "platformName": "Android",
     "automationName": "UiAutomator2",
     "appName": "ApiDemos-debug.apk",
     "appPackage": "io.appium.android.apis",
-    "avdName": "Pixel_4"
+    "avdName": "Pixel_4_API_30"
   }
 }
