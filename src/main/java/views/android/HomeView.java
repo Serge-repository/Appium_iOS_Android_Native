@@ -8,7 +8,6 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.MyElement;
 
@@ -32,7 +31,6 @@ public class HomeView extends DataManagement {
 
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Accessibility\")")
     @iOSXCUITFindBy(accessibility = "Accessibility")
-    @FindBy(css = "abc")
     private MobileElement elementForBothAndroidAndIOS;
 
     private final MyElement views = new MyElement("Views button", MobileBy.AccessibilityId("Views"));
@@ -42,19 +40,10 @@ public class HomeView extends DataManagement {
     }
 
     public void differentSelectorsStrategies() {
-        // accessibilityButton.click();
         System.out.println(appiumDriver.findElementByAccessibilityId("Accessibility").getText());
-
-        // secondElement.click();
         System.out.println(appiumDriver.findElementById("android:id/text1").getText());
-
-        // thirdElement.click();
         System.out.println(appiumDriver.findElementByClassName("android.widget.TextView").getText());
-
-        // берем из Appium Inspector
         System.out.println(appiumDriver.findElementByXPath("//android.widget.TextView[@content-desc=\"Accessibility\"]").getText());
-
-        // elementsList.get(2).click();
         System.out.println(appiumDriver.findElementsById("android:id/text1").get(2).getText());
     }
 

@@ -23,7 +23,6 @@ public class HomeViewIOS extends DataManagement {
 
 //    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Accessibility\")")
 //    @iOSXCUITFindBy(accessibility = "Accessibility")
-//    @FindBy(css = "abc")
 //    private MobileElement elementForBothAndroidAndIOS;
 
     private final MyElement activityIndicators = new MyElement("Activity Indicators tab", MobileBy.AccessibilityId("Activity Indicators"));
