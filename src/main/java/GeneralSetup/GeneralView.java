@@ -13,6 +13,8 @@ import utils.TouchActionClass;
 import utils.WaitUtils;
 import utils.ios.ActionsWithDeviceAndAppIOS;
 
+import java.util.Set;
+
 import static org.testng.AssertJUnit.assertTrue;
 
 public abstract class GeneralView {
@@ -57,6 +59,13 @@ public abstract class GeneralView {
     public void enterKeyUsingKeyboard(AndroidKey... androidKey){
         for (AndroidKey key : androidKey) {
             ((AndroidDriver) appiumDriver).pressKey(new KeyEvent().withKey(key));
+        }
+    }
+
+    public void seeAllAppContexts(){
+        Set<String> appContexts = appiumDriver.getContextHandles();
+        for (String context : appContexts) {
+            System.out.println(context);
         }
     }
 
